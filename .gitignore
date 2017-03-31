@@ -1,3 +1,4 @@
 *.o
+envkey
 stegive
-test.bin
+*.bin

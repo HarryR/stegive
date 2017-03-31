@@ -16,6 +16,12 @@
 #endif
 
 
+static uint
+bytes_to_uint( u8 *ch ) {
+	return ch[0] | ch[1]<<8 | ch[2]<<16 | ch[3]<<24;
+}
+
+
 const u8 *
 block_ptr( filehdl_t *handle )
 {
@@ -28,8 +34,8 @@ block_ptr( filehdl_t *handle )
 uint
 block_start_outer( filehdl_t *handle )
 {
-	uint *first_uint = (uint*)(&handle->nonce.secret[0]);
-	return *first_uint % handle->archive->enc_nblks;
+	uint first_uint = bytes_to_uint(&handle->nonce.secret[0]);
+	return first_uint % handle->archive->enc_nblks;
 }
 
 
